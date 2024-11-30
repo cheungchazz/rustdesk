@@ -508,18 +508,19 @@ class _RemotePageState extends State<RemotePage> with WidgetsBindingObserver {
                           futureBuilder(
                               future: gFFI.invokeMethod(
                                   "get_value", "KEY_IS_SUPPORT_VOICE_CALL"),
-                              hasData: (isSupportVoiceCall) => IconButton(
-                                    color: Colors.white,
-                                    icon: isAndroid && isSupportVoiceCall
-                                        ? SvgPicture.asset('assets/chat.svg',
-                                            colorFilter: ColorFilter.mode(
-                                                Colors.white, BlendMode.srcIn))
-                                        : Icon(Icons.message),
-                                    onPressed: () =>
-                                        isAndroid && isSupportVoiceCall
-                                            ? showChatOptions(widget.id)
-                                            : onPressedTextChat(widget.id),
-                                  ))
+                                  hasData: (isSupportVoiceCall) => Container() // 直接返回空容器
+//                               hasData: (isSupportVoiceCall) => IconButton(
+//                                     color: Colors.white,
+//                                     icon: isAndroid && isSupportVoiceCall
+//                                         ? SvgPicture.asset('assets/chat.svg',
+//                                             colorFilter: ColorFilter.mode(
+//                                                 Colors.white, BlendMode.srcIn))
+//                                         : Icon(Icons.message),
+//                                     onPressed: () =>
+//                                         isAndroid && isSupportVoiceCall
+//                                             ? showChatOptions(widget.id)
+//                                             : onPressedTextChat(widget.id),
+//                                   ))
                         ]) +
                   [
                     IconButton(
@@ -691,11 +692,13 @@ class _RemotePageState extends State<RemotePage> with WidgetsBindingObserver {
   }
 
   onPressedTextChat(String id) {
+    return; // 直接返回,不执行后续代码
     gFFI.chatModel.changeCurrentKey(MessageKey(id, ChatModel.clientModeID));
     gFFI.chatModel.toggleChatOverlay();
   }
 
   showChatOptions(String id) async {
+    return; // 直接返回,不执行后续代码
     onPressVoiceCall() => bind.sessionRequestVoiceCall(sessionId: sessionId);
     onPressEndVoiceCall() => bind.sessionCloseVoiceCall(sessionId: sessionId);
 
